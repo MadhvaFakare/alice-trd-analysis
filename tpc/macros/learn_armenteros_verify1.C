@@ -25,8 +25,8 @@ void learn_armenteros_verify1(){
     TH2F *hAll = (TH2F*)gDirectory->Get("hAll");
     hAll->SetTitle("Armenteros-Podolanski Plot#alpha;q_{T} (GeV/C)");
     //Verify if those white space are truely emplty
-    Long64_t = nTotal = tree->GetEntries();
-    Long64_t = nWhitePatch = tree->GetEntries("abs(fAlphaV0)<0.2 && fQtV0>0.12 && fQtV0<0.18");
+    Long64_t nTotal = tree->GetEntries();
+    Long64_t nWhitePatch = tree->GetEntries("abs(fAlphaV0)<0.2 && fQtV0>0.12 && fQtV0<0.18");
     printf("\n--- White-space diagnostic ---\n");
     printf("Entries in patch |alpha|<0.2, 0.12<qT<0.18 (looks white in linear colz): %lld\n", nWhitePatch);
     printf("Total entries: %lld  (fraction: %.6f)\n", nTotal, (double)nWhitePatch/nTotal);

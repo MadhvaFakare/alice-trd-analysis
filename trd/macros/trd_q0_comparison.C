@@ -32,6 +32,6 @@ void trd_q0_comparison() {
     TLegendEntry *e2 = leg->AddEntry(hPi, Form("Pions (mean=%.2f, N=%.0f)", hPi->GetMean(), hPi->GetEntries()), "1");
     e2->SetTextColor(kBlue);
     leg->Draw();
-    c->SetLogy();
+    //c->SetLogy();
     c->SaveAs("/home/madhvafakare/alice/my-analysis/plots/trd_q0_comparison.png");
 }

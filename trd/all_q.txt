@@ -1,0 +1,36 @@
+
+Processing trd/macros/trd_all_q.C...
+Chained 48659 tracks
+
+=== all 18 charge columns, electrons vs pions ===
+slice  layer    mean e     N e  mean pi    N pi sep.power    Q cut eff_pi@90%
+Q0     0         27.02     150    24.63    1427     0.116      8.0     0.900
+Q0     1         26.01     163    23.57    1455     0.141     10.0     0.833
+Q0     2         32.02     168    23.94    1723     0.360     10.0     0.852
+Q0     3         27.95     195    24.29    1830     0.192     10.0     0.840
+Q0     4         28.43     192    24.66    1799     0.188     10.0     0.843
+Q0     5         34.31     164    24.76    1527     0.434     14.0     0.681
+
+Q1     0         29.08     151    24.11    1431     0.276      9.0     0.874
+Q1     1         30.04     165    23.49    1499     0.356      9.0     0.879
+Q1     2         32.39     172    23.70    1733     0.459      9.0     0.863
+Q1     3         28.60     199    23.93    1847     0.272      9.0     0.885
+Q1     4         30.15     201    23.74    1816     0.374     10.0     0.853
+Q1     5         30.27     172    23.99    1570     0.370     12.0     0.788
+
+Q2     0         21.36     156    18.14    1493     0.315     11.0     0.882
+Q2     1         20.12     170    17.70    1547     0.271     12.0     0.779
+Q2     2         23.28     180    18.28    1801     0.472     12.0     0.832
+Q2     3         20.93     208    17.57    1917     0.357     12.0     0.811
+Q2     4         21.26     208    18.33    1897     0.294     12.0     0.819
+Q2     5         21.07     185    18.52    1642     0.258     12.0     0.829
+
+Best separation power: fQ22 at 0.472
+
+Blue is electrons, red is pions.
+eff_pi@90% is the fraction of pions surviving a cut that keeps 90%
+of electrons. Lower is better. The published design goal is below
+0.01 with all six chambers combined, so one chamber alone will be
+much worse. Reference: ALICE, NIM A 881 (2018) 88, arXiv:1709.02743.
+
+Written: trd/plots/trd_all_q.png
