@@ -2,3 +2,4 @@ plots/*.root
 plots/archive/
 macros/archive/
 *.root
+trd/macros/trd_all_q01.C
