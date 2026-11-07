@@ -561,7 +561,7 @@ void trd_likelihood(const char* fname = "/home/madhvafakare/alice/PbPb2023pass5/
         }
         row++;
     }
-    cPdf->SaveAs("plots/trd_likelihood_pdfs.png");
+    cPdf->SaveAs("/home/madhvafakare/alice/my-analysis/trd/plots/trd_likelihood_pdfs.png");
 
     // 7b. lookup tables (fold 0): fit solid, histogram dashed. Like Felix's Figures 5.7 and 5.9
     TCanvas* cLut = new TCanvas("lqLut", "Lookup tables (fold 0)", 1800, 450 * nUsable);
@@ -598,7 +598,7 @@ void trd_likelihood(const char* fname = "/home/madhvafakare/alice/PbPb2023pass5/
         }
         row++;
     }
-    cLut->SaveAs("plots/trd_likelihood_luts.png");
+    cLut->SaveAs("/home/madhvafakare/alice/my-analysis/trd/plots/trd_likelihood_luts.png");
 
     // 7c. L_e distributions (fit LUTs) and pion vs electron efficiency for all methods
     TCanvas* cRes = new TCanvas("lqRes", "Electron likelihood", 1800, 500 * nUsable);
@@ -652,5 +652,5 @@ void trd_likelihood(const char* fname = "/home/madhvafakare/alice/PbPb2023pass5/
         lg->Draw();
         row++;
     }
-    cRes->SaveAs("plots/trd_likelihood_results.png");
+    cRes->SaveAs("/home/madhvafakare/alice/my-analysis/trd/plots/trd_likelihood_results.png");
 }

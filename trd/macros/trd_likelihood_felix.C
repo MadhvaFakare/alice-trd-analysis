@@ -249,5 +249,5 @@ void trd_likelihood_felix(const char* fname = "/home/madhvafakare/alice/PbPb2023
     for (int m = 0; m < 3; m++) lg3->AddEntry(g[m], mname[m], "l");
     lg3->Draw();
 
-    c->SaveAs("plots/trd_likelihood_felix.png");
+    c->SaveAs("/home/madhvafakare/alice/my-analysis/trd/plots/trd_likelihood_felix.png");
 }

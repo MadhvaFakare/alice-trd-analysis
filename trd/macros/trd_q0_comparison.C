@@ -33,5 +33,5 @@ void trd_q0_comparison() {
     e2->SetTextColor(kBlue);
     leg->Draw();
     //c->SetLogy();
-    c->SaveAs("/home/madhvafakare/alice/my-analysis/plots/trd_q0_comparison.png");
+    c->SaveAs("/home/madhvafakare/alice/my-analysis/trd/plots/trd_q0_comparison.png");
 }

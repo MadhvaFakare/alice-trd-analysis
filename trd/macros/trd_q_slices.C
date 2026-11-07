@@ -33,7 +33,7 @@ double scanAt(TH1F *hEl, TH1F *hPi, double target, double &cutOut, double &effEl
 
 void trd_q_slices(
     const char *inFile = "/home/madhvafakare/alice/PbPb2023pass5/trd/AnalysisResults.root",
-    const char *outPng = "/home/madhvafakare/alice/my-analysis/plots/trd_q_slices.png") {
+    const char *outPng = "/home/madhvafakare/alice/my-analysis/trd/plots/trd_q_slices.png") {
 
     TFile *f = TFile::Open(inFile);
     if (!f || f->IsZombie()) { printf("Cannot open %s\n", inFile); return; }

@@ -68,5 +68,5 @@ void trd_q_simple() {
     hQ2El->Draw("HIST");
     hQ2Pi->Draw("HIST SAME");
 
-    c->SaveAs("/home/madhvafakare/alice/my-analysis/plots/trd_q_simple.png");
+    c->SaveAs("/home/madhvafakare/alice/my-analysis/trd/plots/trd_q_simple.png");
 }

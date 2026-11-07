@@ -11,7 +11,7 @@
 //   electrons N = 145, mean ~ 76.96    pions N = 1365, mean ~ 65.78
 // (the numbers from explore_tree.C). If not, stop and check the cuts.
 //
-// Output: sumQ_layer0.png / .pdf (linear y) and sumQ_layer0_log.png (log y)
+// Output (in trd/plots/): sumQ_layer0.png / .pdf (linear y) and sumQ_layer0_log.png (log y)
 
 #include <TFile.h>
 #include <TKey.h>
@@ -142,7 +142,8 @@ void sumQ_layer0(const char* fname = "/home/madhvafakare/alice/PbPb2023pass5/trd
     if (ptMin > 0. || ptMax < 100.)
       tx.DrawLatex(0.17, 0.75, Form("%.1f #leq p_{T} < %.1f GeV/c", ptMin, ptMax));
 
-    TString out = logy ? "sumQ_layer0_log" : "sumQ_layer0";
+    TString out = "/home/madhvafakare/alice/my-analysis/trd/plots/";
+    out += logy ? "sumQ_layer0_log" : "sumQ_layer0";
     if (ptMin > 0. || ptMax < 100.) out += Form("_pt%.1f-%.1f", ptMin, ptMax);
     c->SaveAs(out + ".png");
     if (!logy) c->SaveAs(out + ".pdf");

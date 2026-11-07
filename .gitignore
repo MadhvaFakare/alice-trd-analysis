@@ -1,8 +1,12 @@
-plots/*.root
-plots/archive/
-macros/archive/
+# ROOT files: data, caches and skim output are never committed
 *.root
-trd/macros/trd_all_q01.C
+
+# Generated figures. The few the README embeds are force-added
+# (`git add -f`); everything else stays local.
 *.png
 *.pdf
-*.root
+
+# Root-level archives of earlier exploratory work, kept on disk only.
+# Anchored with a leading slash so that trd/macros/archive/ stays tracked.
+/plots/archive/
+/macros/archive/

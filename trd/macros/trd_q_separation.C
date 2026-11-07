@@ -227,7 +227,7 @@ void trd_q_separation(const char* fname = "/home/madhvafakare/alice/PbPb2023pass
         lg->Draw();
       }
     }
-    c->SaveAs(Form("plots/trd_%s_per_layer.png", sliceName[s]));
+    c->SaveAs(Form("/home/madhvafakare/alice/my-analysis/trd/plots/trd_%s_per_layer.png", sliceName[s]));
   }
 
   // per-track averages, 4 pads (Q0, Q1, Q2, total)
@@ -245,7 +245,7 @@ void trd_q_separation(const char* fname = "/home/madhvafakare/alice/PbPb2023pass
       lg->Draw();
     }
   }
-  ct->SaveAs("plots/trd_per_track_average.png");
+  ct->SaveAs("/home/madhvafakare/alice/my-analysis/trd/plots/trd_per_track_average.png");
 
   printf("Plots saved in ./plots/\n");
 }

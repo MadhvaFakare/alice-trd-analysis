@@ -75,6 +75,6 @@ void trd_fig55(double pMin = 1.0, double pMax = 2.0,
         leg->Draw();
     }
 
-    c->SaveAs("/home/madhvafakare/alice/my-analysis/plots/trd_fig55.png");
-    printf("\nWritten: plots/trd_fig55.png\n");
+    c->SaveAs("/home/madhvafakare/alice/my-analysis/trd/plots/trd_fig55.png");
+    printf("\nWritten: trd/plots/trd_fig55.png\n");
 }
