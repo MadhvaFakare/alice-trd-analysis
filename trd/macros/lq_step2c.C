@@ -5,53 +5,48 @@
 #include <TStyle.h>
 #include <algorithm>
 
-// Step 2c: P(Q|e) and P(Q|pi) for every window and every layer,
-//          fQ00 ... fQ25, in 1 < pT < 2 GeV/c.
-// Run:    root -l lq_step2c.C
-// Output: ../plots/step2c_all.png  (rows = Q0, Q1, Q2; columns = layer 0 to 5)
+/*
+   Step 2c: P(Q|e) and P(Q|pi) for every window and every layer,
+            fQ00 ... fQ25, in 1 < pT < 2 GeV/c.
+            Rows are Q0, Q1, Q2; columns are layer 0 to 5.
+*/
 
 void lq_step2c() {
 
-    // =========================================================================
-    // 1. Open the data
-    // =========================================================================
+    /* ===== 1. Open the data ===== */
     Track t;
     TChain* c = OpenTrdTree(t);
     if (!c) {
         return;
     }
 
-    // =========================================================================
-    // 2. Settings
-    // =========================================================================
-    const int   nW    = 3;      // windows Q0, Q1, Q2
-    const int   nBins = 15;     // only ~50-80 electrons per histogram, so keep it coarse
+    /* ===== 2. Settings ===== */
+    const int   nW    = 3;      /* windows Q0, Q1, Q2 */
+    const int   nBins = 15;     /* only ~50-80 electrons per histogram, so keep it coarse */
     const float ptMin = 1.0;
     const float ptMax = 2.0;
 
-    // =========================================================================
-    // 3. Axis range per histogram
-    //    For each branch: find the charge that 99% of the tracks are below,
-    //    and end the axis 10% above that. (Using the maximum instead would let
-    //    a few outliers squeeze everything into the first bins.)
-    // =========================================================================
+    /* ===== 3. Axis range per histogram =====
+       For each branch: find the charge that 99% of the tracks are below,
+       and end the axis 10% above that. Using the maximum instead would let
+       a few outliers squeeze everything into the first bins. */
     float qMax[nW][kNLayers];
 
     for (int w = 0; w < nW; w++) {
         for (int l = 0; l < kNLayers; l++) {
 
-            // which branch, and which tracks
+            /* which branch, and which tracks */
             TString branch    = Form("fQ%d%d", w, l);
             TString selection = Form("%s>0 && fSpecies>=0 && fPt>=%f && fPt<=%f",
                                      branch.Data(), ptMin, ptMax);
 
-            // fill a temporary histogram with that branch (no window)
+            /* fill a temporary histogram with that branch (no window) */
             c->Draw(branch + ">>hTmp(400,0,400)", selection, "goff");
             TH1* hTmp = (TH1*)gDirectory->Get("hTmp");
 
-            // ask: below which value are 99% of the entries?
-            double p = 0.99;     // the question: 99%
-            double q = 100.0;    // the answer box (100 is only a fallback)
+            /* ask: below which value are 99% of the entries? */
+            double p = 0.99;     /* the question: 99% */
+            double q = 100.0;    /* the answer box (100 is only a fallback) */
             if (hTmp && hTmp->GetEntries() > 0) {
                 hTmp->GetQuantiles(1, &q, &p);
             }
@@ -60,10 +55,8 @@ void lq_step2c() {
         }
     }
 
-    // =========================================================================
-    // 4. Book the histograms: one electron and one pion histogram per
-    //    window and layer
-    // =========================================================================
+    /* ===== 4. Book the histograms =====
+       One electron and one pion histogram per window and layer. */
     TH1F* hEl[nW][kNLayers];
     TH1F* hPi[nW][kNLayers];
 
@@ -76,13 +69,11 @@ void lq_step2c() {
         }
     }
 
-    // =========================================================================
-    // 5. Loop over the tracks and fill
-    // =========================================================================
+    /* ===== 5. Loop over the tracks and fill ===== */
     for (Long64_t i = 0; i < c->GetEntries(); i++) {
         c->GetEntry(i);
 
-        // momentum window
+        /* momentum window */
         if (t.pt < ptMin || t.pt > ptMax) {
             continue;
         }
@@ -92,12 +83,12 @@ void lq_step2c() {
 
                 float q = t.q[w][l];
 
-                // this window is missing (-1)
+                /* this window is missing (-1) */
                 if (q <= 0) {
                     continue;
                 }
 
-                // a charge above the axis goes into the last bin, not lost
+                /* a charge above the axis goes into the last bin, not lost */
                 if (q >= qMax[w][l]) {
                     q = 0.999 * qMax[w][l];
                 }
@@ -112,9 +103,7 @@ void lq_step2c() {
         }
     }
 
-    // =========================================================================
-    // 6. Print how many electrons and pions are in each histogram
-    // =========================================================================
+    /* ===== 6. Print how many electrons and pions are in each histogram ===== */
     printf("\nentries per window and layer\n");
 
     for (int w = 0; w < nW; w++) {
@@ -125,9 +114,8 @@ void lq_step2c() {
         }
     }
 
-    // =========================================================================
-    // 7. Normalise to area 1: counts become probabilities P(Q|e) and P(Q|pi)
-    // =========================================================================
+    /* ===== 7. Normalise to area 1 =====
+       Counts become probabilities P(Q|e) and P(Q|pi). */
     for (int w = 0; w < nW; w++) {
         for (int l = 0; l < kNLayers; l++) {
             double areaEl = hEl[w][l]->Integral();
@@ -142,9 +130,7 @@ void lq_step2c() {
         }
     }
 
-    // =========================================================================
-    // 8. Draw: 6 columns (layers) x 3 rows (windows)
-    // =========================================================================
+    /* ===== 8. Draw: 6 columns (layers) x 3 rows (windows) ===== */
     gStyle->SetOptStat(0);
 
     TCanvas* cv = new TCanvas("cv", "", 2400, 1200);
@@ -158,11 +144,11 @@ void lq_step2c() {
     for (int w = 0; w < nW; w++) {
         for (int l = 0; l < kNLayers; l++) {
 
-            // pads are numbered 1 to 18, row by row
+            /* pads are numbered 1 to 18, row by row */
             int pad = w * kNLayers + l + 1;
             cv->cd(pad);
 
-            // leave room above the higher of the two curves
+            /* leave room above the higher of the two curves */
             double top = std::max(hEl[w][l]->GetMaximum(), hPi[w][l]->GetMaximum());
             hEl[w][l]->SetMaximum(1.2 * top);
 
@@ -174,7 +160,7 @@ void lq_step2c() {
             hEl[w][l]->Draw("hist");
             hPi[w][l]->Draw("hist same");
 
-            // legend only in the first pad
+            /* legend only in the first pad */
             if (pad == 1) {
                 leg->Draw();
             }
